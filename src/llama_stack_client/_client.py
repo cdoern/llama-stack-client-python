@@ -45,6 +45,7 @@ from .resources import (
     batch_inference,
     scoring_functions,
     synthetic_data_generation,
+    configurations
 )
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
@@ -71,6 +72,7 @@ __all__ = [
 
 
 class LlamaStackClient(SyncAPIClient):
+    configurations: configurations.ConfigurationsResource
     toolgroups: toolgroups.ToolgroupsResource
     tools: tools.ToolsResource
     tool_runtime: tool_runtime.ToolRuntimeResource
@@ -153,6 +155,7 @@ class LlamaStackClient(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.configurations = configurations.ConfigurationsResource(self)
         self.toolgroups = toolgroups.ToolgroupsResource(self)
         self.tools = tools.ToolsResource(self)
         self.tool_runtime = tool_runtime.ToolRuntimeResource(self)
@@ -287,6 +290,7 @@ class LlamaStackClient(SyncAPIClient):
 
 
 class AsyncLlamaStackClient(AsyncAPIClient):
+    configurations: configurations.AsyncConfigurationsResource
     toolgroups: toolgroups.AsyncToolgroupsResource
     tools: tools.AsyncToolsResource
     tool_runtime: tool_runtime.AsyncToolRuntimeResource
@@ -369,6 +373,7 @@ class AsyncLlamaStackClient(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.configurations = configurations.AsyncConfigurationsResource(self)
         self.toolgroups = toolgroups.AsyncToolgroupsResource(self)
         self.tools = tools.AsyncToolsResource(self)
         self.tool_runtime = tool_runtime.AsyncToolRuntimeResource(self)
@@ -504,6 +509,7 @@ class AsyncLlamaStackClient(AsyncAPIClient):
 
 class LlamaStackClientWithRawResponse:
     def __init__(self, client: LlamaStackClient) -> None:
+        self.configurations = configurations.ConfigurationsResourceWithRawResponse(client.configurations)
         self.toolgroups = toolgroups.ToolgroupsResourceWithRawResponse(client.toolgroups)
         self.tools = tools.ToolsResourceWithRawResponse(client.tools)
         self.tool_runtime = tool_runtime.ToolRuntimeResourceWithRawResponse(client.tool_runtime)
@@ -533,6 +539,7 @@ class LlamaStackClientWithRawResponse:
 
 class AsyncLlamaStackClientWithRawResponse:
     def __init__(self, client: AsyncLlamaStackClient) -> None:
+        self.configurations = configurations.AsyncConfigurationsResourceWithRawResponse
         self.toolgroups = toolgroups.AsyncToolgroupsResourceWithRawResponse(client.toolgroups)
         self.tools = tools.AsyncToolsResourceWithRawResponse(client.tools)
         self.tool_runtime = tool_runtime.AsyncToolRuntimeResourceWithRawResponse(client.tool_runtime)
@@ -564,6 +571,7 @@ class AsyncLlamaStackClientWithRawResponse:
 
 class LlamaStackClientWithStreamedResponse:
     def __init__(self, client: LlamaStackClient) -> None:
+        self.configurations = configurations.ConfigurationsResourceWithStreamingResponse
         self.toolgroups = toolgroups.ToolgroupsResourceWithStreamingResponse(client.toolgroups)
         self.tools = tools.ToolsResourceWithStreamingResponse(client.tools)
         self.tool_runtime = tool_runtime.ToolRuntimeResourceWithStreamingResponse(client.tool_runtime)
@@ -595,6 +603,7 @@ class LlamaStackClientWithStreamedResponse:
 
 class AsyncLlamaStackClientWithStreamedResponse:
     def __init__(self, client: AsyncLlamaStackClient) -> None:
+        self.configurations = configurations.AsyncConfigurationsResourceWithStreamingResponse
         self.toolgroups = toolgroups.AsyncToolgroupsResourceWithStreamingResponse(client.toolgroups)
         self.tools = tools.AsyncToolsResourceWithStreamingResponse(client.tools)
         self.tool_runtime = tool_runtime.AsyncToolRuntimeResourceWithStreamingResponse(client.tool_runtime)
